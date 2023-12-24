@@ -1,0 +1,66 @@
+
+.side-nav-header-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.menu-nav {
+    padding: 1rem;
+    padding-right: 1rem;
+}
+
+.header-info {
+    display: flex;
+    gap: 1rem;
+}
+
+.sidenav-btn {
+    display: flex;
+    justify-content: end;
+    margin-right: 0.7rem;
+}
+
+.side-nav-logo-img {
+    width: 40px;
+}
+
+.side-nav-profile-img {
+    width: 40px;
+}
+
+.side-nav-btn-img {
+    width: 7px;
+}
+
+/*Nav Menu */
+
+.side-nav-menu-nav {
+    display: flex;   
+    flex-direction: column;
+    gap: 1px;
+}
+
+.navmenu {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    padding: 1rem;
+    padding-left: 1.5rem;
+}
+
+.navmenu:hover {
+    cursor: pointer;
+    color: #EDEEF8;
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.navmenu-icon {
+    width: 30px;
+}
+
+.navmenu-title {
+    font-weight: 500;
+    font-size: 12px;
+}
+

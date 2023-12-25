@@ -18,14 +18,14 @@ export function Sidebar({toggleState,handleToggle}:SidebarType) {
     return (
         <div className={`sidebar-layout ${toggleState ? 'sidebar-hidden' : ''}`}>
             
-            <div className="side-nav-header-bar menu-nav">
+            <div className="sidebar-header menu-nav">
                 <div className="header-info">
-                    <img className='side-nav-logo-img' alt='' src={Logo} />
-                    <picture className='side-nav-profile-img'>
+                    <img className='logo-img' alt='' src={Logo} />
+                    <picture className='profile-img'>
                         <img src={Profile} alt="" className='' />
                     </picture>
                 </div>
-                <div className="sidenav-btn">
+                <div className="sidebar-toggle">
                     <div className="sidenav-btn-wrapper toggle-close" onClick={handleToggle}>
                         <img src={HideNavIcon} className='side-nav-btn-img' alt="" />
                         <img src={HideNavIcon} className='side-nav-btn-img' alt="" />
@@ -37,13 +37,13 @@ export function Sidebar({toggleState,handleToggle}:SidebarType) {
                 </div>
             </div>
 
-            <div className='side-nav-menu-nav'>
+            <div className='sidebar-menu'>
                 {navMenuData.length > 0 && navMenuData.map((menuItemData) => {
                     return <NavMenu key={nanoid()} navMenuTitle = {menuItemData?.navMenuTitle} navMenuIcon={menuItemData?.navMenuImg} />
                 })}
             </div>
             
-            <div className="side-nav-add-btn">
+            <div className="sidebar-add-btn">
                 <button className='btn untoggled-btn'>
                     <img src={AddIcon} alt="" />
                     Add data

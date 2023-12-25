@@ -1,17 +1,21 @@
 .index-layout {
     width:100%;
+    height: 100%;
     background-color:#F9F9FE;
     display: flex;
 }
 
 .sidebar-layout {
-    width: 15%;
-    min-width: 272px;
+    width: 200px;
     height: 100%;
+    min-width: 272px;
     color: #EDEEF8;
     background-color: #1D3666;
+    transition: all 0.5s ease;
+    overflow: hidden;
 }
 
-.mainbar-layout {
-    
+.sidebar-hidden {
+    width: 100px;
+    min-width: 50px;
 }

@@ -1,0 +1,151 @@
+.sidebar-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.menu-nav {
+    padding: 1rem;
+    padding-right: 1rem;
+}
+
+.header-info {
+    display: flex;
+    gap: 1rem;
+}
+
+.sidebar-toggle {
+    display: flex;
+    justify-content: end;
+}
+
+.sidenav-btn-wrapper {
+    display: flex;
+    justify-content: end;
+    margin-right: 0.7rem;
+}
+
+.toggle-open {
+    display: none;
+}
+
+.sidenav-btn-wrapper:hover {
+    cursor: pointer;
+}
+
+.logo-img,
+.profile-img  {
+    width: 40px;
+    max-width: 40px;
+    min-width: 40px;
+    position: relative;
+}
+
+.side-nav-btn-img {
+    width: 7px;
+}
+
+.profile-img::after {
+    content: '';
+    position: absolute;
+    top: 1px;
+    right: 1px;
+    width: 12px;
+    height: 12px;
+    background-color: #E35953;
+    border-radius: 70%;
+    border: 2px solid white;
+}
+
+/*Nav Menu */
+
+.sidebar-menu {
+    display: flex;   
+    flex-direction: column;
+    gap: 1px;
+}
+
+.navmenu {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    padding: 1rem;
+    padding-left: 1.5rem;
+    text-wrap: nowrap;
+}
+
+.navmenu:hover {
+    cursor: pointer;
+    color: #EDEEF8;
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.navmenu-icon {
+    width: 25px;
+    max-width: 25px;
+    min-width: 25px;
+}
+
+.navmenu-title {
+    font-weight: 300;
+    font-size: 14px;
+}
+
+.sidebar-add-btn {
+    padding: 1rem;
+    margin-top: 20vh;
+}
+
+.sidebar-add-btn button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color:#2559D6;
+    color: #ffffff;
+    gap: 1rem;
+    font-weight: 300;
+    text-wrap: nowrap;
+}
+
+.sidebar-add-btn button img {
+    width: 15px;
+}
+
+.sidebar-add-btn button:hover {
+    opacity: 0.8;
+    background-color:#2559D6;
+}
+
+.toggled-btn {
+    display: none !important;
+}
+
+/*Toggled Menu Style*/
+
+.sidebar-hidden .sidebar-header .header-info .profile-img {
+    display: none;
+}
+
+.sidebar-hidden .sidebar-menu .navmenu .navmenu-title {
+    display: none;
+}
+
+.sidebar-hidden .toggle-close {
+    display: none;
+}
+
+.sidebar-hidden .toggle-open {
+    display: flex;
+    transform: rotate(180deg);
+    margin-left: 1rem;
+}
+
+.sidebar-hidden .sidebar-add-btn .untoggled-btn {
+    display: none !important;
+}
+
+.sidebar-hidden .sidebar-add-btn .toggled-btn {
+    display: flex !important;
+    padding: 0.5rem;
+    width: 50px;
+} 

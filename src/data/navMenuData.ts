@@ -10,7 +10,12 @@ import FilesIcon from "../assets/svg/FilesIcon.svg"
 import InfographicsIcon from "../assets/svg/InfograhicsIcon.svg"
 import FaqIcons from "../assets/svg/FaqIcon.svg"
 
-export const navMenuData = [
+interface NavMenuDataType {
+    navMenuTitle: string;
+    navMenuImg:string;
+}
+
+export const navMenuData:NavMenuDataType[] = [
     {
         navMenuTitle: "Monitoring",
         navMenuImg: MonitorIcon

@@ -1,0 +1,20 @@
+.year-selector {
+    width: 100px;
+    display: flex;
+    align-items: center;
+    margin-top: -1px;
+    user-select: none;
+}
+
+.year-selector .year-value {
+    font-size: 12px;
+    user-select: none;
+}
+
+.year-selector-arrow {
+    margin-top: -1px;
+}
+
+.year-selector-arrow:hover {
+    cursor: pointer;
+}

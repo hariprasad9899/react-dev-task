@@ -15,7 +15,7 @@
     transition: all 0.5s ease;
     overflow-y: auto;
     overflow-x: hidden;
-    position: fixed;
+    /* position: fixed; */
     top: 0;
     left: 0;
     bottom: 0;
@@ -23,6 +23,11 @@
 
 .sidebar-layout::-webkit-scrollbar {
     display: none;
+}
+
+.mainbar-layout {
+    /* margin-left: 200px; */
+    padding: 1rem;
 }
 
 .sidebar-hidden {

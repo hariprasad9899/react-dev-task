@@ -7,7 +7,6 @@ interface SchedulerCardType {
 
 export function SchedulerCard({ fromDate, toDate, cardIndex }: SchedulerCardType) {
     const dateInfoObj = getDateDifference(fromDate, toDate);
-    console.log(dateInfoObj);
 
     if (!dateInfoObj) {
         return null;
@@ -34,6 +33,7 @@ export function SchedulerCard({ fromDate, toDate, cardIndex }: SchedulerCardType
                 top: `${topPercentage}rem`,
                 backgroundColor: `${bgColors[cardIndex % bgColors.length]}`
             }}>
+            <div>Some Title</div>
             <button className="btn detailed-view-btn">Detailed View</button>
         </div>
     );

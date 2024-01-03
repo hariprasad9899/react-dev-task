@@ -78,6 +78,7 @@
     text-wrap: nowrap;
 }
 
+.navmenu-active,
 .navmenu:hover {
     cursor: pointer;
     color: #EDEEF8;

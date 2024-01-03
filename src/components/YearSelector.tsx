@@ -7,7 +7,10 @@ interface YearSelectorType {
     decrementYear: () => void
     incrementYear: () => void
 }
-
+/**
+ * @param {YearSelectorType} - object that contains the  the current year, and function to increment/decrement year
+ * @returns 
+ */
 export function YearSelector({currentYearValue,decrementYear, incrementYear}:YearSelectorType) {
 
     return (

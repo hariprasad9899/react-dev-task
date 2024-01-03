@@ -8,15 +8,18 @@ import { getDateTimestampForYear } from "../utils/getDateTimestampForYear"
 import { getUserRecomendation } from "../services/getUserRecomendation"
 
 export function SchedulerComponent() {
-
+    
+    // state to iterate the years to see the recomendations
     const [recomendationYear, setRecomendationYear] = useState<number>(2020)
+
+    // state to store the api response for particula recomended year
     const [userRecomendations, setUserRecomendations] = useState<any>([])
 
-    const incrementYear = () => {
+    const incrementRecomendationYear = () => {
         setRecomendationYear((t) => t + 1)
     }
 
-    const decrementYear = () => {
+    const decrementRecomendationYear = () => {
         setRecomendationYear((t) => t - 1)
     }
 
@@ -47,30 +50,27 @@ export function SchedulerComponent() {
         },
     ];
 
-    // useEffect(() => {
-
-    //     const apiData = async (timestampOfYear:any) => {
-    //         console.log();
-            
-    //         try {
-    //             const apiRes = await getUserRecomendation(timestampOfYear.startTimestamp,timestampOfYear.endTimestamp)
-    //             console.log(apiRes);
-    //             const { userRecommendations } = apiRes
-    //             setUserRecomendations(userRecommendations)
-    //         } catch(err) {
-    //             console.log(err);
-    //         }
-    //     }
-    //     const timestampOfYear = getDateTimestampForYear(recomendationYear)
-    //     apiData(timestampOfYear) 
-
-    // },[recomendationYear])
-
     useEffect(() => {
-        console.log(userRecomendations);
-        
-    },[userRecomendations])
-    
+
+        const apiData = async (timestampOfYear:any) => {
+            console.log();
+            
+            try {
+                const apiRes = await getUserRecomendation(timestampOfYear.startTimestamp,timestampOfYear.endTimestamp)
+                console.log(apiRes);
+                const { userRecommendations } = apiRes
+                setUserRecomendations(userRecommendations)
+            } catch(err) {
+                console.log(err);
+            }
+        }
+        // gettings the timstamp from Jan 1 - Dec 31 for the recomended year using utility function
+        const timestampOfYear = getDateTimestampForYear(recomendationYear)
+
+        // make a get request to get the recomendations for the selected year
+        apiData(timestampOfYear) 
+
+    },[recomendationYear])
     
     return (
         <div className="scheduler-container">
@@ -85,15 +85,13 @@ export function SchedulerComponent() {
 
             <div className="scheduler-component shadow shadow-shadow-sm">
 
-                
-
                 <div className="scheduler-header">
                     <div className="recomendation-period">
                         <div className="label-period">Period: <span className="label-year">Year</span> </div>
                         <YearSelector 
                             currentYearValue={recomendationYear} 
-                            decrementYear={decrementYear} 
-                            incrementYear={incrementYear}
+                            decrementYear={decrementRecomendationYear} 
+                            incrementYear={incrementRecomendationYear}
                         />
                     </div>
                     <div className="recomendation-btn">

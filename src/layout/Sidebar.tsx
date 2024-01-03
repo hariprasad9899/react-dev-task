@@ -14,7 +14,6 @@ interface SidebarType {
 
 export function Sidebar({toggleState,handleToggle}:SidebarType) {
 
-
     return (
         <div className={`sidebar-layout ${toggleState ? 'sidebar-hidden' : ''}`}>
             

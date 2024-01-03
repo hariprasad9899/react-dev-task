@@ -10,7 +10,6 @@ export function Routers() {
             <Route path='/' element={<IndexLayout />}>
                 <Route path='/recomendations' element={<SchedulerComponent />}></Route>
                 <Route path='/recomendations/drilled-list' element={<DrillDownComponent />}></Route>
-                
             </Route>
         </Routes>
     )

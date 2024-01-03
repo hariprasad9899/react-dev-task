@@ -1,6 +1,6 @@
 import { Sidebar } from "./Sidebar";
 import "../styles/indexlayout.css"
-import { Mainbar } from "./Mainbar";
+import { CoreView } from "./CoreView";
 import { useState } from "react";
 
 export function IndexLayout() {
@@ -14,7 +14,7 @@ export function IndexLayout() {
     return (
         <div className="index-layout">
             <Sidebar toggleState = {isSidenavToggle} handleToggle = {handleSidenavToggle}/>
-            <Mainbar />
+            <CoreView />
         </div>
     )
 

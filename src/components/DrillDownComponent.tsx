@@ -3,9 +3,9 @@ import '../styles/drillDownComponent.css'
 import {useState,useEffect} from 'react'
 import { Iprops } from "../utils/getMonthsAndDays";
 export function DrillDownComponent() {
-    const data = [{ startDate: '9/01/2023', endDate: '30/05/2023' }];
+    const data = [{ startDate: '9/12/2022', endDate: '30/03/2023' }];
     const [result, setResult] = useState({});
-
+    const [janYear,setJanYear]=useState(2024)
     const CreateArrayWithLengthAndValue = (length: number) => {
         return Array.from({ length }, (_, index) => index + 1);
     };
@@ -17,15 +17,18 @@ export function DrillDownComponent() {
           data.forEach(({ startDate, endDate }) => {
             const [startDay, startMonth, startYear] = startDate.split('/').map(Number);
             const [endDay, endMonth, endYear] = endDate.split('/').map(Number);
-    
+           
             let start = new Date(startYear, startMonth - 1, startDay);
             let end = new Date(endYear, endMonth - 1, endDay);
-    
+            
             while (start <= end) {
               const monthKey = `${start.getMonth() + 1}/${start.getFullYear()}`;
               const monthName = new Intl.DateTimeFormat('en-US', { month: 'long' }).format(start);
               const daysInMonth = new Date(start.getFullYear(), start.getMonth() + 1, 0).getDate();
-    
+            
+                if(monthKey[0]==='1'){
+                    setJanYear(start.getFullYear())
+                }
               if (!newResult[monthKey]) {
                 newResult[monthKey] = { days: 0, monthName };
               }
@@ -139,7 +142,7 @@ export function DrillDownComponent() {
 
                             <div className="drill-timePeriod-header">
                                 <div className="drill-year-name">
-                                    {monthName}
+                                    { (monthName==='January'?janYear:' ')+ " " + monthName}
                                 </div>
                                 <div className="drill-year-date">
                                     {CreateArrayWithLengthAndValue(days).map((item: number, index: number) => (<div style={{ height: "100%", width: `${100 / days}%`  }}>

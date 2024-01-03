@@ -39,7 +39,7 @@ export function Sidebar({toggleState,handleToggle}:SidebarType) {
 
             <div className='sidebar-menu'>
                 {navMenuData.length > 0 && navMenuData.map((menuItemData) => {
-                    return <NavMenu key={nanoid()} navMenuTitle = {menuItemData?.navMenuTitle} navMenuIcon={menuItemData?.navMenuImg} />
+                    return <NavMenu key={nanoid()} navMenuTitle = {menuItemData?.navMenuTitle} navRoute={menuItemData.navRoute} navMenuIcon={menuItemData?.navMenuImg} />
                 })}
             </div>
             

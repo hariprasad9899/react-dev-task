@@ -47,22 +47,24 @@ export function SchedulerComponent() {
         },
     ];
 
-    useEffect(() => {
+    // useEffect(() => {
 
-        const apiData = async (timestampOfYear:any) => {
-            try {
-                const apiRes = await getUserRecomendation(timestampOfYear.startTimestamp,timestampOfYear.endTimestamp)
-                console.log(apiRes);
-                const { userRecommendations } = apiRes
-                setUserRecomendations(userRecommendations)
-            } catch(err) {
-                console.log(err);
-            }
-        }
-        const timestampOfYear = getDateTimestampForYear(recomendationYear)
-        apiData(timestampOfYear) 
+    //     const apiData = async (timestampOfYear:any) => {
+    //         console.log();
+            
+    //         try {
+    //             const apiRes = await getUserRecomendation(timestampOfYear.startTimestamp,timestampOfYear.endTimestamp)
+    //             console.log(apiRes);
+    //             const { userRecommendations } = apiRes
+    //             setUserRecomendations(userRecommendations)
+    //         } catch(err) {
+    //             console.log(err);
+    //         }
+    //     }
+    //     const timestampOfYear = getDateTimestampForYear(recomendationYear)
+    //     apiData(timestampOfYear) 
 
-    },[recomendationYear])
+    // },[recomendationYear])
 
     useEffect(() => {
         console.log(userRecomendations);

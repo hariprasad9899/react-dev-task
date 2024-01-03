@@ -13,51 +13,64 @@ import FaqIcons from "../assets/svg/FaqIcon.svg"
 interface NavMenuDataType {
     navMenuTitle: string;
     navMenuImg:string;
+    navRoute:string;
 }
 
+// Object to render the list of sidenav menu 
 export const navMenuData:NavMenuDataType[] = [
     {
         navMenuTitle: "Monitoring",
-        navMenuImg: MonitorIcon
+        navMenuImg: MonitorIcon,
+        navRoute: "monitor",
     },
     {
         navMenuTitle: "Goals and quests",
-        navMenuImg: GoalsIcon
+        navMenuImg: GoalsIcon,
+        navRoute: "goals"
     },
     {
         navMenuTitle: "Biomarkers",
-        navMenuImg: BioMarkers
+        navMenuImg: BioMarkers,
+        navRoute:"biomakers",
     },
     {
         navMenuTitle: "Recomendations",
-        navMenuImg: RecomendationsIcon
+        navMenuImg: RecomendationsIcon,
+        navRoute:"recomendations"
     },
     {
         navMenuTitle: "Medical Records",
-        navMenuImg: RecordsIcon
+        navMenuImg: RecordsIcon,
+        navRoute: "medical-records",
     },
     {
         navMenuTitle: "Nutrition",
-        navMenuImg: NutritionIcon
+        navMenuImg: NutritionIcon,
+        navRoute:"nutrition"
     },
     {
         navMenuTitle: "Genetics",
-        navMenuImg: GeneticsIcon
+        navMenuImg: GeneticsIcon,
+        navRoute:"genetics",
     },
     {
         navMenuTitle: "Organs and system",
-        navMenuImg: OrgansIcon
+        navMenuImg: OrgansIcon,
+        navRoute:"organs"
     },
     {
         navMenuTitle: "Files",
-        navMenuImg: FilesIcon
+        navMenuImg: FilesIcon,
+        navRoute:"files",
     },
     {
         navMenuTitle: "Infographics",
-        navMenuImg: InfographicsIcon
+        navMenuImg: InfographicsIcon,
+        navRoute:"infographics"
     },
     {
         navMenuTitle: "FAQ",
-        navMenuImg: FaqIcons
+        navMenuImg: FaqIcons,
+        navRoute:"faq"
     }
 ]

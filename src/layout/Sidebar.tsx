@@ -6,6 +6,7 @@ import "../styles/sidebar.css"
 import { navMenuData } from '../data/navMenuData';
 import { nanoid } from 'nanoid';
 import AddIcon from "../assets/svg/AddIcon.svg"
+import { useState } from 'react';
 
 interface SidebarType {
     toggleState: boolean;
@@ -14,6 +15,11 @@ interface SidebarType {
 
 export function Sidebar({toggleState,handleToggle}:SidebarType) {
 
+    const [activeMenu, setActiveMenu] = useState("recomendations")
+
+    const updateActiveMenu = (menuName:string) => {
+        setActiveMenu(menuName)
+    }
 
     return (
         <div className={`sidebar-layout ${toggleState ? 'sidebar-hidden' : ''}`}>
@@ -39,7 +45,14 @@ export function Sidebar({toggleState,handleToggle}:SidebarType) {
 
             <div className='sidebar-menu'>
                 {navMenuData.length > 0 && navMenuData.map((menuItemData) => {
-                    return <NavMenu key={nanoid()} navMenuTitle = {menuItemData?.navMenuTitle} navMenuIcon={menuItemData?.navMenuImg} />
+                    return <NavMenu 
+                                key={nanoid()} 
+                                navMenuTitle = {menuItemData?.navMenuTitle} 
+                                navRoute={menuItemData.navRoute} 
+                                navMenuIcon={menuItemData?.navMenuImg} 
+                                activeMenu = {activeMenu}
+                                updateActiveMenu = {updateActiveMenu}
+                            />
                 })}
             </div>
             

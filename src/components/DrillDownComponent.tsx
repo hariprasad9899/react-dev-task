@@ -1,10 +1,49 @@
 import PrintIcon from "../assets/svg/PrintIcon.svg"
 import '../styles/drillDownComponent.css'
+import {useState,useEffect} from 'react'
+import { Iprops } from "../utils/getMonthsAndDays";
 export function DrillDownComponent() {
+    const data = [{ startDate: '9/01/2023', endDate: '30/05/2023' }];
+    const [result, setResult] = useState({});
+
     const CreateArrayWithLengthAndValue = (length: number) => {
         return Array.from({ length }, (_, index) => index + 1);
     };
-    console.log(CreateArrayWithLengthAndValue(31))
+    
+    useEffect(() => {
+        const getMonthsAndDays = () => {
+          const newResult :any= {};
+    
+          data.forEach(({ startDate, endDate }) => {
+            const [startDay, startMonth, startYear] = startDate.split('/').map(Number);
+            const [endDay, endMonth, endYear] = endDate.split('/').map(Number);
+    
+            let start = new Date(startYear, startMonth - 1, startDay);
+            let end = new Date(endYear, endMonth - 1, endDay);
+    
+            while (start <= end) {
+              const monthKey = `${start.getMonth() + 1}/${start.getFullYear()}`;
+              const monthName = new Intl.DateTimeFormat('en-US', { month: 'long' }).format(start);
+              const daysInMonth = new Date(start.getFullYear(), start.getMonth() + 1, 0).getDate();
+    
+              if (!newResult[monthKey]) {
+                newResult[monthKey] = { days: 0, monthName };
+              }
+          
+ 
+              newResult[monthKey].days =  (daysInMonth );
+    
+              start.setMonth(start.getMonth() + 1);
+              start.setDate(1);
+            }
+          });
+      
+          setResult(newResult);
+        };
+    
+        getMonthsAndDays();
+      }, []);
+      console.log(Object.values(result))
     return (
         <div className="drill-down-container">
             <div className="drill-down-title">
@@ -94,15 +133,17 @@ export function DrillDownComponent() {
                         </div>
                     </div>
                     <div className="drill-drop-year">
-                        <div>
+                      {Object.values(result)?.map((item:any)=>{
+                        const {days,monthName}=item
+                        return(  <div>
 
                             <div className="drill-timePeriod-header">
                                 <div className="drill-year-name">
-                                    December
+                                    {monthName}
                                 </div>
                                 <div className="drill-year-date">
-                                    {CreateArrayWithLengthAndValue(31).map((item: number, index: number) => (<div style={{ height: "100%", width: `${100 / 31}%`  }}>
-                                        {item%2!==0?item:''}
+                                    {CreateArrayWithLengthAndValue(days).map((item: number, index: number) => (<div style={{ height: "100%", width: `${100 / days}%`  }}>
+                                        {item%2!==0? item:''}
                                     </div>))}
                                 </div>
 
@@ -110,43 +151,43 @@ export function DrillDownComponent() {
                             <div className="drill-timePeriod-morning" style={{ padding: "0px", flexDirection: "column" }}>
 
                                 <div style={{ height: "50%", borderBottom: "1px solid #CBD4EB", display: "flex" }}>
-                                    {CreateArrayWithLengthAndValue(31).map((item: number, index: number) => (<div style={{ height: "100%", width: `${100 / 31}%`, borderRight: `${index !== 30 ? '1px solid #CBD4EB' : ''}` }}>
+                                    {CreateArrayWithLengthAndValue(days).map((item: number, index: number) => (<div style={{ height: "100%", width: `${100 / days}%`, borderRight: `${index !== (days-1) ? '1px solid #CBD4EB' : ''}` }}>
 
                                     </div>))}
                                 </div>
                                 <div style={{ height: "50%", display: "flex" }}>
-                                    {CreateArrayWithLengthAndValue(31).map((item: number, index: number) => (<div style={{ height: "100%", width: `${100 / 31}%`, borderRight: `${index !== 30 ? '1px solid #CBD4EB' : ''}` }}>
+                                    {CreateArrayWithLengthAndValue(days).map((item: number, index: number) => (<div style={{ height: "100%", width: `${100 / days}%`, borderRight: `${index !== (days-1) ? '1px solid #CBD4EB' : ''}` }}>
 
                                     </div>))}
                                 </div>
                             </div>
                             <div className="drill-timePeriod-day" style={{ padding: "0px", flexDirection: "column" }}>
                                 <div style={{ height: "50%", borderBottom: "1px solid #CBD4EB", display: "flex" }}>
-                                    {CreateArrayWithLengthAndValue(31).map((item: number, index: number) => (<div style={{ height: "100%", width: `${100 / 31}%`, borderRight: `${index !== 30 ? '1px solid #CBD4EB' : ''}` }}>
+                                    {CreateArrayWithLengthAndValue(days).map((item: number, index: number) => (<div style={{ height: "100%", width: `${100 / days}%`, borderRight: `${index !== (days-1) ? '1px solid #CBD4EB' : ''}` }}>
 
                                     </div>))}
                                 </div>
                                 <div style={{ height: "50%", display: "flex" }}>
-                                    {CreateArrayWithLengthAndValue(31).map((item: number, index: number) => (<div style={{ height: "100%", width: `${100 / 31}%`, borderRight: `${index !== 30 ? '1px solid #CBD4EB' : ''}` }}>
+                                    {CreateArrayWithLengthAndValue(days).map((item: number, index: number) => (<div style={{ height: "100%", width: `${100 / days}%`, borderRight: `${index !== (days-1) ? '1px solid #CBD4EB' : ''}` }}>
 
                                     </div>))}
                                 </div>
                             </div>
                             <div className="drill-timePeriod-evening" style={{ padding: "0px", flexDirection: "column" }}>
                                 <div style={{ height: "50%", borderBottom: "1px solid #CBD4EB", display: "flex" }}>
-                                    {CreateArrayWithLengthAndValue(31).map((item: number, index: number) => (<div style={{ height: "100%", width: `${100 / 31}%`, borderRight: `${index !== 30 ? '1px solid #CBD4EB' : ''}` }}>
+                                    {CreateArrayWithLengthAndValue(days).map((item: number, index: number) => (<div style={{ height: "100%", width: `${100 / days}%`, borderRight: `${index !== (days-1) ? '1px solid #CBD4EB' : ''}` }}>
 
                                     </div>))}
                                 </div>
                                 <div style={{ height: "50%", display: "flex" }}>
-                                    {CreateArrayWithLengthAndValue(31).map((item: number, index: number) => (<div style={{ height: "100%", width: `${100 / 31}%`, borderRight: `${index !== 30 ? '1px solid #CBD4EB' : ''}` }}>
+                                    {CreateArrayWithLengthAndValue(days).map((item: number, index: number) => (<div style={{ height: "100%", width: `${100 / days}%`, borderRight: `${index !== (days-1) ? '1px solid #CBD4EB' : ''}` }}>
 
                                     </div>))}
                                 </div>
                             </div>
 
-                        </div>
-                        <div>
+                        </div>)})}
+                        {/* <div>
 
                             <div className="drill-timePeriod-header">
                                 <div className="drill-year-name">
@@ -301,7 +342,7 @@ export function DrillDownComponent() {
                                 </div>
                             </div>
 
-                        </div>
+                        </div> */}
                     </div>
                 </div>
             </div>

@@ -16,7 +16,7 @@ export function SchedulerComponent() {
     // state to store the api response for particula recomended year
     const [userRecomendations, setUserRecomendations] = useState<any>([])
 
-    const {recommendations, targetYear, isLoading } = useSelector((state:RootState) => state.userRecommendations)
+    const {recommendations, targetYear, isLoading, isEmpty } = useSelector((state:RootState) => state.userRecommendations)
 
     const dispatch = useDispatch()
 
@@ -76,7 +76,7 @@ export function SchedulerComponent() {
                 </div>
             </div>
 
-            <div className="scheduler-component shadow shadow-shadow-sm">
+           {  <div className="scheduler-component shadow shadow-shadow-sm">
 
                 <div className="scheduler-header">
                     <div className="recomendation-period">
@@ -95,47 +95,64 @@ export function SchedulerComponent() {
                     </div>
                 </div>
 
-                <div className="scheduler-body" style={{height: `${mockApiData.length * 7.5}rem`}}>
-                    <div className="calendar-month">Jan</div>
-                    <div className="calendar-month">Feb</div>
-                    <div className="calendar-month">Mar</div>
-                    <div className="calendar-month">Apr</div>
-                    <div className="calendar-month">May</div>
-                    <div className="calendar-month">Jun</div>
-                    <div className="calendar-month">Jul</div>
-                    <div className="calendar-month">Aug</div>
-                    <div className="calendar-month">Sep</div>
-                    <div className="calendar-month">Oct</div>
-                    <div className="calendar-month">Nov</div>
-                    <div className="calendar-month">Dec</div>
-                    {
-                        recommendations.length > 0 && recommendations.map((apiData:any,index:number) => {
-                            return (
-                                <SchedulerCard 
-                                    fromDate={apiData?.["dateFrom"]} 
-                                    key={nanoid()} 
-                                    toDate={apiData?.["dateTo"]} 
-                                    cardIndex={index+1} 
-                                    cardName={apiData?.["targetName"]}
-                                />
-                            )
-                        })
-                    }
+                
 
-                    {
-                        isLoading ? 
-                        <div className="recommendation-loader">
-                            <div className="spinner-border text-primary">
-                                <span className="visually-hidden">Loading...</span>
-                            </div> 
+                { 
+                    isEmpty ? 
+                    <div className="no-recommendations">
+                        <div className="no-recommendations-content">
+                            <h5>There is no recomendations</h5>
+                            <button className="btn btn-primary add-recommendation-btn">Add Recommendations</button>
                         </div>
-                        : 
-                        null
-                    }
+                    </div> 
+                    : 
 
-                </div>
+                    <div className="scheduler-body" style={{height: `${mockApiData.length * 7.5}rem`}}>
+                        <div className="calendar-month">Jan</div>
+                        <div className="calendar-month">Feb</div>
+                        <div className="calendar-month">Mar</div>
+                        <div className="calendar-month">Apr</div>
+                        <div className="calendar-month">May</div>
+                        <div className="calendar-month">Jun</div>
+                        <div className="calendar-month">Jul</div>
+                        <div className="calendar-month">Aug</div>
+                        <div className="calendar-month">Sep</div>
+                        <div className="calendar-month">Oct</div>
+                        <div className="calendar-month">Nov</div>
+                        <div className="calendar-month">Dec</div>
+                        {
+                            recommendations.length > 0 && recommendations.map((apiData:any,index:number) => {
+                                return (
+                                    <SchedulerCard 
+                                        fromDate={apiData?.["dateFrom"]} 
+                                        key={nanoid()} 
+                                        toDate={apiData?.["dateTo"]} 
+                                        cardIndex={index+1} 
+                                        cardName={apiData?.["targetName"]}
+                                    />
+                                )
+                            })
+                        }
 
-            </div>
+                        {
+                            isLoading ? 
+                            <div className="recommendation-loader">
+                                <div className="spinner-border text-primary">
+                                    <span className="visually-hidden">Loading...</span>
+                                </div> 
+                            </div>
+                            : 
+                            null
+                        }
+
+                    </div>
+
+                }   
+                
+               
+                
+
+            </div>}
         </div>
         
     )

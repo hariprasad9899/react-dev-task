@@ -16,7 +16,7 @@ export function SchedulerComponent() {
     // state to store the api response for particula recomended year
     const [userRecomendations, setUserRecomendations] = useState<any>([])
 
-    const {recommendations, targetYear} = useSelector((state:RootState) => state.userRecommendations)
+    const {recommendations, targetYear, isLoading } = useSelector((state:RootState) => state.userRecommendations)
 
     const dispatch = useDispatch()
 
@@ -121,6 +121,18 @@ export function SchedulerComponent() {
                             )
                         })
                     }
+
+                    {
+                        isLoading ? 
+                        <div className="recommendation-loader">
+                            <div className="spinner-border text-primary">
+                                <span className="visually-hidden">Loading...</span>
+                            </div> 
+                        </div>
+                        : 
+                        null
+                    }
+
                 </div>
 
             </div>

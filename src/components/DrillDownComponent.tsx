@@ -1,10 +1,24 @@
+import { useSelector } from "react-redux";
 import PrintIcon from "../assets/svg/PrintIcon.svg"
 import '../styles/drillDownComponent.css'
+import { RootState } from "../redux/store";
+import { useEffect } from "react";
 export function DrillDownComponent() {
+
+    const { targetIdForDetailedView, recommendations } = useSelector((state:RootState) => state.userRecommendations)
+
     const CreateArrayWithLengthAndValue = (length: number) => {
         return Array.from({ length }, (_, index) => index + 1);
     };
-    console.log(CreateArrayWithLengthAndValue(31))
+    // console.log(CreateArrayWithLengthAndValue(31))
+    
+    useEffect(() => {
+        if(targetIdForDetailedView) {
+            console.log(targetIdForDetailedView);
+            console.log(recommendations)
+        }
+    }, [targetIdForDetailedView])
+
     return (
         <div className="drill-down-container">
             <div className="drill-down-title">

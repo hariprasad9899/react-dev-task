@@ -13,7 +13,7 @@ import { incrementTargetYear, decrementTargetYear } from "../redux/slice/userRec
 
 export function SchedulerComponent() {
     
-    const {recommendations, targetYear, isLoading, isEmpty } = useSelector((state:RootState) => state.userRecommendations)
+    const {recommendations, targetYear, isLoading, isEmpty , targetIdSet } = useSelector((state:RootState) => state.userRecommendations)
 
     const dispatch = useDispatch()
 
@@ -90,14 +90,16 @@ export function SchedulerComponent() {
                         <div className="calendar-month">Nov</div>
                         <div className="calendar-month">Dec</div>
                         {
-                            recommendations.length > 0 && recommendations.map((apiData:any,index:number) => {
+                            targetIdSet.length > 0 && targetIdSet.map((targetIndex:any,index:number) => {
+                                const interventionData = recommendations[targetIndex][0]
                                 return (
                                     <SchedulerCard 
-                                        fromDate={apiData?.["dateFrom"]} 
+                                        fromDate={interventionData?.["dateFrom"]} 
                                         key={nanoid()} 
-                                        toDate={apiData?.["dateTo"]} 
+                                        toDate={interventionData?.["dateTo"]} 
                                         cardIndex={index+1} 
-                                        cardName={apiData?.["targetName"]}
+                                        cardName={interventionData?.["targetName"]}
+                                        targetedId={interventionData?.["targetId"]}
                                     />
                                 )
                             })

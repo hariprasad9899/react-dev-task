@@ -2,7 +2,6 @@
     width: 100px;
     display: flex;
     align-items: center;
-    margin-top: -1px;
     user-select: none;
 }
 
@@ -11,10 +10,6 @@
     user-select: none;
 }
 
-.year-selector-arrow {
-    margin-top: -1px;
-}
-
-.year-selector-arrow:hover {
+.year-selector span:hover {
     cursor: pointer;
 }

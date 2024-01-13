@@ -26,4 +26,5 @@ body {
 body {
   font-family: "Inter";
   font-weight: 500;
+  overflow: hidden;
 }

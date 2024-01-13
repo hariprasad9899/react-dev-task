@@ -1,7 +1,7 @@
 import "../styles/schedulerComponent.css"
 import AddIconBlue from "../assets/svg/AddIconBlue.svg"
 import { YearSelector } from "./YearSelector"
-import { useEffect, useState } from "react"
+import { useEffect } from "react"
 import { SchedulerCard } from "./SchedulerCard"
 import PrintIcon from "../assets/svg/PrintIcon.svg"
 import { getDateTimestampForYear } from "../utils/getDateTimestampForYear"
@@ -13,9 +13,6 @@ import { incrementTargetYear, decrementTargetYear } from "../redux/slice/userRec
 
 export function SchedulerComponent() {
     
-    // state to store the api response for particula recomended year
-    const [userRecomendations, setUserRecomendations] = useState<any>([])
-
     const {recommendations, targetYear, isLoading, isEmpty } = useSelector((state:RootState) => state.userRecommendations)
 
     const dispatch = useDispatch()
@@ -28,42 +25,15 @@ export function SchedulerComponent() {
         dispatch(decrementTargetYear())
     }
 
-    const mockApiData = [
-        {
-            "dateFrom": 1675209600,
-            "dateTo": 1682812800,
-        },
-        {
-            "dateFrom": 1651209600,
-            "dateTo": 1662309800,
-        },
-        {
-            "dateFrom": 1675209600,
-            "dateTo": 1685209600,
-        },
-        {
-            "dateFrom": 1675123600,
-            "dateTo": 1696623600,
-        },
-        {
-            "dateFrom": 1653209600,
-            "dateTo": 1662309800,
-        },
-        {
-            "dateFrom": 1675348800,
-            "dateTo": 1682812800,
-        },
-    ];
-
-
     useEffect(() => {
-        const timestampOfYear = getDateTimestampForYear(targetYear)
+        sessionStorage.setItem("targetYear",targetYear.toString())
+        const timestampOfYear = getDateTimestampForYear(targetYear);
         const timeStampInfo = {
             start: timestampOfYear.startTimestamp,
-            end: timestampOfYear.endTimestamp
-        }
-        dispatch(getUserRecomendation(timeStampInfo))
-    },[targetYear])
+            end: timestampOfYear.endTimestamp,
+        };
+        dispatch(getUserRecomendation(timeStampInfo));
+    }, [targetYear]);
     
     return (
         <div className="scheduler-container">
@@ -76,13 +46,13 @@ export function SchedulerComponent() {
                 </div>
             </div>
 
-           {  <div className="scheduler-component shadow shadow-shadow-sm">
+            <div className="scheduler-component shadow shadow-shadow-sm">
 
                 <div className="scheduler-header">
                     <div className="recomendation-period">
                         <div className="label-period">Period: <span className="label-year">Year</span> </div>
                         <YearSelector 
-                            currentYearValue={targetYear} 
+                            currentYearValue={+targetYear} 
                             decrementYear={handleTargetYearDecrement} 
                             incrementYear={handleTargetYearIncrement}
                         />
@@ -96,7 +66,6 @@ export function SchedulerComponent() {
                 </div>
 
                 
-
                 { 
                     isEmpty ? 
                     <div className="no-recommendations">
@@ -107,7 +76,7 @@ export function SchedulerComponent() {
                     </div> 
                     : 
 
-                    <div className="scheduler-body" style={{height: `${mockApiData.length * 7.5}rem`}}>
+                    <div className="scheduler-body" style={{height: `${recommendations.length * 7.5}rem`}}>
                         <div className="calendar-month">Jan</div>
                         <div className="calendar-month">Feb</div>
                         <div className="calendar-month">Mar</div>
@@ -152,7 +121,7 @@ export function SchedulerComponent() {
                
                 
 
-            </div>}
+            </div>
         </div>
         
     )

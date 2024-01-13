@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { getUserRecomendation } from "../../services/getUserRecomendation";
+import { getTargetYear } from "../../data/helperFunctions";
 
 interface userRecommendationType {
     targetYear: number,
@@ -10,7 +11,7 @@ interface userRecommendationType {
 }
 
 const initialState:userRecommendationType = {
-    targetYear: 2023,
+    targetYear: getTargetYear(),
     isLoading: false,
     isError: false,
     isEmpty: false,

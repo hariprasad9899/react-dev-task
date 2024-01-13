@@ -1,13 +1,15 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { getUserRecomendation } from "../../services/getUserRecomendation";
-import { getTargetYear } from "../../data/helperFunctions";
+import { getTargetYear, groupByTargetId } from "../../data/helperFunctions";
 
 interface userRecommendationType {
     targetYear: number,
     isLoading: boolean,
     isError: boolean,
     isEmpty: boolean,
-    recommendations: any[]
+    recommendations: []
+    targetIdSet: number[] | [],
+    targetIdForDetailedView: number | null
 }
 
 const initialState:userRecommendationType = {
@@ -15,7 +17,9 @@ const initialState:userRecommendationType = {
     isLoading: false,
     isError: false,
     isEmpty: false,
-    recommendations: []
+    recommendations: [],
+    targetIdSet: [],
+    targetIdForDetailedView: null
 }
 
 const userRecommendationData = createSlice({
@@ -27,6 +31,13 @@ const userRecommendationData = createSlice({
         },
         decrementTargetYear: (state) => {
             state.targetYear -= 1
+        },
+        storeTargetedId: (state,action) => {
+            const { id } = action.payload;
+            state.targetIdForDetailedView = id
+        },
+        resetTargetedId: (state) => {
+            state.targetIdForDetailedView = null;
         }
     },
     extraReducers: (builder) => {
@@ -41,11 +52,12 @@ const userRecommendationData = createSlice({
                 state.recommendations = [];
                 state.isEmpty = true;
             } else {
-                state.recommendations = userRecommendations;
+                const { filteredTargetObj, targetIds} = groupByTargetId(userRecommendations)
+                state.recommendations = filteredTargetObj;
+                state.targetIdSet = targetIds;
                 state.isEmpty = false;
             }
-            state.recommendations = action.payload?.userRecommendations;
-        })
+         })
         .addCase(getUserRecomendation.rejected, (state) => {
             state.isLoading = false;
             state.isError = true
@@ -53,6 +65,6 @@ const userRecommendationData = createSlice({
     }
 })
 
-export const { incrementTargetYear, decrementTargetYear } = userRecommendationData.actions
+export const { incrementTargetYear, decrementTargetYear, storeTargetedId, resetTargetedId } = userRecommendationData.actions
 
 export default userRecommendationData.reducer

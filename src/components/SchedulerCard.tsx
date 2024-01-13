@@ -1,15 +1,19 @@
 import { useNavigate } from "react-router";
 import { getDateDifference } from "../utils/getDateDifference";
 import { CARD_BACKGROUND_COLORS, CARD_TOP_ASPECT_RATIO, CARD_WIDTH_ASPECT_RATIO } from "../data/constants";
+import { useDispatch } from "react-redux";
+import { storeTargetedId } from "../redux/slice/userRecommendationSlice";
 interface SchedulerCardType {
     fromDate: number,
     toDate: number,
     cardIndex: number,
-    cardName: string 
+    cardName: string,
+    targetedId: number
 }
 
-export function SchedulerCard({ fromDate, toDate, cardIndex, cardName }: SchedulerCardType) {
+export function SchedulerCard({ fromDate, toDate, cardIndex, cardName, targetedId }: SchedulerCardType) {
     const navigate = useNavigate()
+    const dispatch = useDispatch()
 
     // function to get the date difference between the two days
     const dateInfoObj = getDateDifference(fromDate, toDate);
@@ -35,6 +39,7 @@ export function SchedulerCard({ fromDate, toDate, cardIndex, cardName }: Schedul
     // function to navigate to details view route
     const handleDetailedViewClick = () => {
         navigate(`/recomendations/drilled-list`)
+        dispatch(storeTargetedId({id: targetedId}))
     }
 
     if(widthPercentage < 5) {

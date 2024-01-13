@@ -1,11 +1,16 @@
+import { useSelector } from "react-redux";
 import PrintIcon from "../assets/svg/PrintIcon.svg"
 import '../styles/drillDownComponent.css'
 import {useState,useEffect} from 'react'
 import { Iprops } from "../utils/getMonthsAndDays";
+import { RootState } from "../redux/store";
 export function DrillDownComponent() {
     const data = [{ startDate: '9/12/2022', endDate: '30/03/2023' }];
     const [result, setResult] = useState({});
     const [janYear,setJanYear]=useState(2024)
+
+    const { targetIdForDetailedView, recommendations } = useSelector((state:RootState) => state.userRecommendations)
+
     const CreateArrayWithLengthAndValue = (length: number) => {
         return Array.from({ length }, (_, index) => index + 1);
     };
@@ -47,6 +52,15 @@ export function DrillDownComponent() {
         getMonthsAndDays();
       }, []);
       console.log(Object.values(result))
+    // console.log(CreateArrayWithLengthAndValue(31))
+    
+    useEffect(() => {
+        if(targetIdForDetailedView) {
+            console.log(targetIdForDetailedView);
+            console.log(recommendations)
+        }
+    }, [targetIdForDetailedView])
+
     return (
         <div className="drill-down-container">
             <div className="drill-down-title">

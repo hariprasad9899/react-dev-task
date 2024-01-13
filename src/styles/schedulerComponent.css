@@ -114,7 +114,7 @@
     border-radius: 10px;
     position: relative;
     overflow: hidden;
-    min-height: 12rem;
+    min-height: 30rem;
 }
 
 .scheduler-body .calendar-month {
@@ -168,7 +168,6 @@
     height: 20px;
     display: block;
 }
-
 
 .scheduler-hover-card {
     display: none;

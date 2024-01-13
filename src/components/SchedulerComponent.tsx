@@ -6,21 +6,26 @@ import { SchedulerCard } from "./SchedulerCard"
 import PrintIcon from "../assets/svg/PrintIcon.svg"
 import { getDateTimestampForYear } from "../utils/getDateTimestampForYear"
 import { getUserRecomendation } from "../services/getUserRecomendation"
+import { nanoid } from "nanoid"
+import { useDispatch, useSelector } from "react-redux"
+import { RootState } from "../redux/store"
+import { incrementTargetYear, decrementTargetYear } from "../redux/slice/userRecommendationSlice"
 
 export function SchedulerComponent() {
     
-    // state to iterate the years to see the recomendations
-    const [recomendationYear, setRecomendationYear] = useState<number>(2020)
-
     // state to store the api response for particula recomended year
     const [userRecomendations, setUserRecomendations] = useState<any>([])
 
-    const incrementRecomendationYear = () => {
-        setRecomendationYear((t) => t + 1)
+    const {recommendations, targetYear} = useSelector((state:RootState) => state.userRecommendations)
+
+    const dispatch = useDispatch()
+
+    const handleTargetYearIncrement = () => {
+        dispatch(incrementTargetYear())
     }
 
-    const decrementRecomendationYear = () => {
-        setRecomendationYear((t) => t - 1)
+    const handleTargetYearDecrement = () => {
+        dispatch(decrementTargetYear())
     }
 
     const mockApiData = [
@@ -50,27 +55,15 @@ export function SchedulerComponent() {
         },
     ];
 
+
     useEffect(() => {
-
-        const apiData = async (timestampOfYear:any) => {
-            console.log();
-            
-            try {
-                const apiRes = await getUserRecomendation(timestampOfYear.startTimestamp,timestampOfYear.endTimestamp)
-                console.log(apiRes);
-                const { userRecommendations } = apiRes
-                setUserRecomendations(userRecommendations)
-            } catch(err) {
-                console.log(err);
-            }
+        const timestampOfYear = getDateTimestampForYear(targetYear)
+        const timeStampInfo = {
+            start: timestampOfYear.startTimestamp,
+            end: timestampOfYear.endTimestamp
         }
-        // gettings the timstamp from Jan 1 - Dec 31 for the recomended year using utility function
-        const timestampOfYear = getDateTimestampForYear(recomendationYear)
-
-        // make a get request to get the recomendations for the selected year
-        apiData(timestampOfYear) 
-
-    },[recomendationYear])
+        dispatch(getUserRecomendation(timeStampInfo))
+    },[targetYear])
     
     return (
         <div className="scheduler-container">
@@ -89,9 +82,9 @@ export function SchedulerComponent() {
                     <div className="recomendation-period">
                         <div className="label-period">Period: <span className="label-year">Year</span> </div>
                         <YearSelector 
-                            currentYearValue={recomendationYear} 
-                            decrementYear={decrementRecomendationYear} 
-                            incrementYear={incrementRecomendationYear}
+                            currentYearValue={targetYear} 
+                            decrementYear={handleTargetYearDecrement} 
+                            incrementYear={handleTargetYearIncrement}
                         />
                     </div>
                     <div className="recomendation-btn">
@@ -116,9 +109,15 @@ export function SchedulerComponent() {
                     <div className="calendar-month">Nov</div>
                     <div className="calendar-month">Dec</div>
                     {
-                        mockApiData.length > 0 && mockApiData.map((apiData,index) => {
+                        recommendations.length > 0 && recommendations.map((apiData:any,index:number) => {
                             return (
-                                <SchedulerCard fromDate={apiData?.["dateFrom"]} toDate={apiData?.["dateTo"]} cardIndex={index+1} />
+                                <SchedulerCard 
+                                    fromDate={apiData?.["dateFrom"]} 
+                                    key={nanoid()} 
+                                    toDate={apiData?.["dateTo"]} 
+                                    cardIndex={index+1} 
+                                    cardName={apiData?.["targetName"]}
+                                />
                             )
                         })
                     }

@@ -4,10 +4,11 @@ import { CARD_BACKGROUND_COLORS, CARD_TOP_ASPECT_RATIO, CARD_WIDTH_ASPECT_RATIO 
 interface SchedulerCardType {
     fromDate: number,
     toDate: number,
-    cardIndex: number
+    cardIndex: number,
+    cardName: string 
 }
 
-export function SchedulerCard({ fromDate, toDate, cardIndex }: SchedulerCardType) {
+export function SchedulerCard({ fromDate, toDate, cardIndex, cardName }: SchedulerCardType) {
     const navigate = useNavigate()
 
     // function to get the date difference between the two days
@@ -44,7 +45,7 @@ export function SchedulerCard({ fromDate, toDate, cardIndex }: SchedulerCardType
                 top: `${topPercentage}rem`,
                 backgroundColor: `${CARD_BACKGROUND_COLORS[cardIndex % CARD_BACKGROUND_COLORS.length]}`
             }}>
-            <div>Some Title</div>
+            <div>{cardName}</div>
             <button className="btn detailed-view-btn" onClick={handleDetailedViewClick}>Detailed View</button>
         </div>
     );

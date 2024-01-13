@@ -4,6 +4,8 @@
     padding: 1rem 1rem 1rem 1rem;
     border-radius: 15px;
     margin-top: 1rem;
+    max-height: 100vh;
+    overflow-y: scroll;
 }
 
 .scheduler-header {
@@ -116,7 +118,7 @@
     color: #FFFFFF;
     font-family: "Inter";
     font-weight: 500;
-    font-size: 14px;
+    font-size: 10px;
     background-color: #DE769C;
 }
 

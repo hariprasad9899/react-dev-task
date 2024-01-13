@@ -1,6 +1,8 @@
 .sidebar-layout {
     min-height: 100vh;
     max-height: 150vh;
+    height: fit-content;
+    position: relative;
 }
 .sidebar-header {
     display: flex;
@@ -73,7 +75,7 @@
     display: flex;
     align-items: center;
     gap: 0.8rem;
-    padding: 1rem;
+    padding: 0.6rem;
     padding-left: 1.5rem;
     text-wrap: nowrap;
 }
@@ -93,12 +95,13 @@
 
 .navmenu-title {
     font-weight: 300;
-    font-size: 14px;
+    font-size: 12px;
 }
 
 .sidebar-add-btn {
+    position: absolute;
     padding: 1rem;
-    margin-top: 20vh;
+    bottom: 0%;
 }
 
 .sidebar-add-btn button {

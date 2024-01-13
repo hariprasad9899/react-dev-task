@@ -54,17 +54,22 @@ export function Sidebar({toggleState,handleToggle}:SidebarType) {
                                 updateActiveMenu = {updateActiveMenu}
                             />
                 })}
+                
+               
             </div>
-            
+
             <div className="sidebar-add-btn">
-                <button className='btn untoggled-btn'>
-                    <img src={AddIcon} alt="" />
-                    Add data
-                </button>
-                <button className='btn toggled-btn' title='Add data'>
-                    <img src={AddIcon} alt="" />
-                </button>
-            </div>
+                    <button className='btn untoggled-btn'>
+                        <img src={AddIcon} alt="" />
+                        Add data
+                    </button>
+                    <button className='btn toggled-btn' title='Add data'>
+                        <img src={AddIcon} alt="" />
+                    </button>
+                </div>
+
+            
+           
 
         </div>
     )

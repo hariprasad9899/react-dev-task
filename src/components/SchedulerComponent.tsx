@@ -10,6 +10,7 @@ import { nanoid } from "nanoid"
 import { useDispatch, useSelector } from "react-redux"
 import { RootState } from "../redux/store"
 import { incrementTargetYear, decrementTargetYear } from "../redux/slice/userRecommendationSlice"
+import { MONTHS } from "../data/constants"
 
 export function SchedulerComponent() {
     
@@ -65,7 +66,6 @@ export function SchedulerComponent() {
                     </div>
                 </div>
 
-                
                 { 
                     isEmpty ? 
                     <div className="no-recommendations">
@@ -74,21 +74,15 @@ export function SchedulerComponent() {
                             <button className="btn btn-primary add-recommendation-btn">Add Recommendations</button>
                         </div>
                     </div> 
+
                     : 
 
                     <div className="scheduler-body" style={{height: `${recommendations.length * 7.5}rem`}}>
-                        <div className="calendar-month">Jan</div>
-                        <div className="calendar-month">Feb</div>
-                        <div className="calendar-month">Mar</div>
-                        <div className="calendar-month">Apr</div>
-                        <div className="calendar-month">May</div>
-                        <div className="calendar-month">Jun</div>
-                        <div className="calendar-month">Jul</div>
-                        <div className="calendar-month">Aug</div>
-                        <div className="calendar-month">Sep</div>
-                        <div className="calendar-month">Oct</div>
-                        <div className="calendar-month">Nov</div>
-                        <div className="calendar-month">Dec</div>
+                        {
+                            MONTHS.map((month:string) => {
+                            return  <div className="calendar-month" key={nanoid()}>{month}</div>
+                            })
+                        }
                         {
                             targetIdSet.length > 0 && targetIdSet.map((targetIndex:any,index:number) => {
                                 const interventionData = recommendations[targetIndex][0]
@@ -104,7 +98,6 @@ export function SchedulerComponent() {
                                 )
                             })
                         }
-
                         {
                             isLoading ? 
                             <div className="recommendation-loader">
@@ -115,7 +108,6 @@ export function SchedulerComponent() {
                             : 
                             null
                         }
-
                     </div>
 
                 }   

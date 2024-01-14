@@ -1,23 +1,14 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { getUserRecomendation } from "../../services/getUserRecomendation";
 import { getTargetYear, groupByTargetId } from "../../data/helperFunctions";
+import { GroupedRecommendationByTargetIdType, UserRecommendationType } from "../sliceType";
 
-interface userRecommendationType {
-    targetYear: number,
-    isLoading: boolean,
-    isError: boolean,
-    isEmpty: boolean,
-    recommendations: []
-    targetIdSet: number[] | [],
-    targetIdForDetailedView: number | null
-}
-
-const initialState:userRecommendationType = {
+const initialState:UserRecommendationType<GroupedRecommendationByTargetIdType> = {
     targetYear: getTargetYear(),
     isLoading: false,
     isError: false,
     isEmpty: false,
-    recommendations: [],
+    recommendations: {},
     targetIdSet: [],
     targetIdForDetailedView: null
 }

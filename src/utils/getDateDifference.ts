@@ -5,13 +5,8 @@ interface DateDifference {
     differenceFromJan1: number;
 }
 
-
-/**
- * 
- * @param dateFrom - date from the start of the selected year
- * @param dateTo - date till the end of the selected year
- * @returns {DateDifference} - object, that contains all the necessary informations
- */
+// utility function to find the difference between two dates (also handling null cases), 
+// and difference in days (for card width), and difference from Jan 1 (for card left margin)
 export function getDateDifference(dateFrom: number | null, dateTo: number | null): DateDifference | null {
     
     // returns null if both are null
@@ -35,13 +30,12 @@ export function getDateDifference(dateFrom: number | null, dateTo: number | null
         toDate = new Date(currentDate.getFullYear(), 11, 31);
     }
 
-
     // calculate the difference is date in order to set the scheduler card width ratio 
     const differenceInMs = toDate.getTime() - fromDate.getTime();
     const differenceInDays = differenceInMs / (1000 * 60 * 60 * 24);
 
     // calculate the difference from January 1st of the year of fromDate 
-    // in order to make the scheduler card left ratio for positioning
+    // in order to make the scheduler card left margin ratio for positioning
     const jan1 = new Date(fromDate.getFullYear(), 0, 1);
     const differenceFromJan1 = (fromDate.getTime() - jan1.getTime()) / (1000 * 60 * 60 * 24);
 

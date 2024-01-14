@@ -5,8 +5,8 @@ import { storeTargetedId } from "../redux/slice/userRecommendationSlice";
 import { useAppDispatch } from "../redux/store";
 
 interface SchedulerCardType {
-    fromDate: number,
-    toDate: number,
+    fromDate: number | null,
+    toDate: number | null,
     cardIndex: number,
     cardName: string,
     targetedId: number

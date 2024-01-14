@@ -11,6 +11,7 @@ import { useSelector } from "react-redux"
 import { RootState, useAppDispatch } from "../redux/store"
 import { incrementTargetYear, decrementTargetYear } from "../redux/slice/userRecommendationSlice"
 import { MONTHS } from "../data/constants"
+import { GroupedRecommendationByTargetIdType } from "../redux/sliceType"
 
 export function SchedulerComponent() {
     
@@ -81,25 +82,30 @@ export function SchedulerComponent() {
 
                     : 
 
-                    <div className="scheduler-body" style={{height: `${recommendations.length * 7.5}rem`}}>
+                    <div className="scheduler-body" style={{height: `${targetIdSet.length * 7.5}rem`}}>
                         {
                             MONTHS.map((month:string) => {
                             return  <div className="calendar-month" key={nanoid()}>{month}</div>
                             })
                         }
                         {
-                            targetIdSet.length > 0 && targetIdSet.map((targetIndex:any,index:number) => {
-                                const interventionData = recommendations[targetIndex][0]
-                                return (
-                                    <SchedulerCard 
-                                        fromDate={interventionData?.["dateFrom"]} 
-                                        key={nanoid()} 
-                                        toDate={interventionData?.["dateTo"]} 
-                                        cardIndex={index+1} 
-                                        cardName={interventionData?.["targetName"]}
-                                        targetedId={interventionData?.["targetId"]}
-                                    />
-                                )
+                            targetIdSet.length > 0 && targetIdSet.map((targetIndex:number | string,index:number) => {
+                                if (typeof recommendations === 'object' && targetIndex in recommendations) {
+                                    const interventionData = (recommendations as GroupedRecommendationByTargetIdType)[targetIndex as string];
+                                    const singeTargetInvervention = interventionData[0]
+                                    return (
+                                        <SchedulerCard 
+                                            fromDate={singeTargetInvervention?.["dateFrom"]} 
+                                            key={nanoid()} 
+                                            toDate={singeTargetInvervention?.["dateTo"]} 
+                                            cardIndex={index+1} 
+                                            cardName={singeTargetInvervention?.["targetName"]}
+                                            targetedId={singeTargetInvervention?.["targetId"]}
+                                        />
+                                    );
+                                } else {
+                                    return null
+                                }
                             })
                         }
                         {

@@ -1,7 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit"
 import { apiUrl } from "./axiosInstance"
 
-export const getUserRecomendation = createAsyncThunk('getUserRecommendation/useRecommendationData', async (timeStampInfo:any) => {
+export const getUserRecomendation = createAsyncThunk('getUserRecommendation/useRecommendationData', async (timeStampInfo:{start:number | null, end: number | null}) => {
 
     const { start, end } = timeStampInfo
     try {

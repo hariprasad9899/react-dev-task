@@ -1,3 +1,4 @@
+import { GroupedRecommendationByTargetIdType, RecommendationApiDataType } from "../redux/sliceType"
 import { DEFAULT_YEAR } from "./constants"
 
 export const getTargetYear = () => {
@@ -9,8 +10,8 @@ export const getTargetYear = () => {
     }
 }
 
-export const groupByTargetId = (recommendationData:any) => {
-    const filteredTargetObj:any = {};
+export const groupByTargetId = (recommendationData:RecommendationApiDataType[]) => {
+    const filteredTargetObj:GroupedRecommendationByTargetIdType = {};
     const targetIds: number[] = [];
     for(let item in recommendationData) {
         const recommendationitem = recommendationData[item]

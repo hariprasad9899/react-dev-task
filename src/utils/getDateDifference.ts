@@ -5,7 +5,6 @@ interface DateDifference {
     differenceFromJan1: number;
 }
 
-
 /**
  * 
  * @param dateFrom - date from the start of the selected year

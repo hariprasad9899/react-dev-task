@@ -13,6 +13,7 @@ export function NavMenu(props:NavMenuType) {
     const {navMenuTitle, navMenuIcon, navRoute, activeMenu, updateActiveMenu} = props;
 
     const navigate = useNavigate()
+    
     const handleNavigation= () => {
         navigate(`/${navRoute}`)
         updateActiveMenu(navRoute)

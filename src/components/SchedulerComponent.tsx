@@ -7,8 +7,8 @@ import PrintIcon from "../assets/svg/PrintIcon.svg"
 import { getDateTimestampForYear } from "../utils/getDateTimestampForYear"
 import { getUserRecomendation } from "../services/getUserRecomendation"
 import { nanoid } from "nanoid"
-import { useDispatch, useSelector } from "react-redux"
-import { RootState } from "../redux/store"
+import { useSelector } from "react-redux"
+import { RootState, useAppDispatch } from "../redux/store"
 import { incrementTargetYear, decrementTargetYear } from "../redux/slice/userRecommendationSlice"
 import { MONTHS } from "../data/constants"
 
@@ -16,7 +16,7 @@ export function SchedulerComponent() {
     
     const {recommendations, targetYear, isLoading, isEmpty , targetIdSet } = useSelector((state:RootState) => state.userRecommendations)
 
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
 
     const handleTargetYearIncrement = () => {
         dispatch(incrementTargetYear())
@@ -50,6 +50,7 @@ export function SchedulerComponent() {
             <div className="scheduler-component shadow shadow-shadow-sm">
 
                 <div className="scheduler-header">
+
                     <div className="recomendation-period">
                         <div className="label-period">Period: <span className="label-year">Year</span> </div>
                         <YearSelector 
@@ -58,16 +59,19 @@ export function SchedulerComponent() {
                             incrementYear={handleTargetYearIncrement}
                         />
                     </div>
+
                     <div className="recomendation-btn">
                         <button className='btn'>
                             <img src={AddIconBlue} alt="" />
                             Add recomendation
                         </button>
                     </div>
+
                 </div>
 
                 { 
                     isEmpty ? 
+
                     <div className="no-recommendations">
                         <div className="no-recommendations-content">
                             <h5>There is no recomendations</h5>
@@ -112,12 +116,7 @@ export function SchedulerComponent() {
 
                 }   
                 
-               
-                
-
             </div>
         </div>
-        
     )
-
 }

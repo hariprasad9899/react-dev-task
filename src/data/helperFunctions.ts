@@ -9,7 +9,6 @@ export const getTargetYear = () => {
     }
 }
 
-
 export const groupByTargetId = (recommendationData:any) => {
     const filteredTargetObj:any = {};
     const targetIds: number[] = [];

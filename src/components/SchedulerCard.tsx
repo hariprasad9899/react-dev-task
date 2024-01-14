@@ -1,8 +1,9 @@
 import { useNavigate } from "react-router";
 import { getDateDifference } from "../utils/getDateDifference";
 import { CARD_BACKGROUND_COLORS, CARD_TOP_ASPECT_RATIO, CARD_WIDTH_ASPECT_RATIO } from "../data/constants";
-import { useDispatch } from "react-redux";
 import { storeTargetedId } from "../redux/slice/userRecommendationSlice";
+import { useAppDispatch } from "../redux/store";
+
 interface SchedulerCardType {
     fromDate: number,
     toDate: number,
@@ -13,7 +14,7 @@ interface SchedulerCardType {
 
 export function SchedulerCard({ fromDate, toDate, cardIndex, cardName, targetedId }: SchedulerCardType) {
     const navigate = useNavigate()
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
 
     // function to get the date difference between the two days
     const dateInfoObj = getDateDifference(fromDate, toDate);

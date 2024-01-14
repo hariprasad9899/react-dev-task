@@ -5,6 +5,7 @@ import { useState } from "react";
 
 export function IndexLayout() {
     
+    // state to manage the side nav toggle 
     const [isSidenavToggle, setIsSideNavToggled] = useState<boolean>(true)
 
     const handleSidenavToggle = () => {

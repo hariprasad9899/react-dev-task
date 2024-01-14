@@ -16,7 +16,7 @@ interface NavMenuDataType {
     navRoute:string;
 }
 
-// Object to render the list of sidenav menu 
+// Object to render the list of sidenav menu with its respective navRoute and icon
 export const navMenuData:NavMenuDataType[] = [
     {
         navMenuTitle: "Monitoring",

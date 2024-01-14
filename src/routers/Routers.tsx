@@ -4,6 +4,7 @@ import { SchedulerComponent } from '../components/SchedulerComponent'
 import { DrillDownComponent } from '../components/DrillDownComponent'
 import { RouteNotFound } from '../components/RouteNotFound'
 
+// specified neceessary compoenents needed for particular routes
 export function Routers() {
 
     return (

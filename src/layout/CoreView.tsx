@@ -1,5 +1,6 @@
 import { Outlet } from "react-router";
 
+// main panel to show all the content respective to its navlink 
 export function CoreView() {
 
     return (

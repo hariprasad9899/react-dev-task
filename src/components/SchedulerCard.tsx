@@ -4,10 +4,11 @@ import { CARD_BACKGROUND_COLORS, CARD_TOP_ASPECT_RATIO, CARD_WIDTH_ASPECT_RATIO 
 interface SchedulerCardType {
     fromDate: number,
     toDate: number,
-    cardIndex: number
+    cardIndex: number,
+    cardName: string 
 }
 
-export function SchedulerCard({ fromDate, toDate, cardIndex }: SchedulerCardType) {
+export function SchedulerCard({ fromDate, toDate, cardIndex, cardName }: SchedulerCardType) {
     const navigate = useNavigate()
 
     // function to get the date difference between the two days
@@ -27,7 +28,7 @@ export function SchedulerCard({ fromDate, toDate, cardIndex }: SchedulerCardType
     }
 
     // calculate the width, left, and top for the card placement inside the scheduler component
-    const widthPercentage = noOfDays * CARD_WIDTH_ASPECT_RATIO;
+    const widthPercentage = Math.abs(noOfDays) * CARD_WIDTH_ASPECT_RATIO;
     const leftPercentage = startsFrom * CARD_WIDTH_ASPECT_RATIO;
     const topPercentage = cardIndex * CARD_TOP_ASPECT_RATIO;
 
@@ -36,15 +37,36 @@ export function SchedulerCard({ fromDate, toDate, cardIndex }: SchedulerCardType
         navigate(`/recomendations/drilled-list`)
     }
 
+    if(widthPercentage < 5) {
+        return (
+            <div className="scheduler-card hoverable-card" 
+                style={{ 
+                    width: `${widthPercentage % 100}%`, 
+                    left: `${leftPercentage}%`, 
+                    top: `${topPercentage}rem`,
+                    backgroundColor: `${CARD_BACKGROUND_COLORS[cardIndex % CARD_BACKGROUND_COLORS.length]}`
+                }}>
+                <div className="scheduler-hover-card" 
+                    style={{
+                        backgroundColor: `${CARD_BACKGROUND_COLORS[cardIndex % CARD_BACKGROUND_COLORS.length]}` 
+                    }}
+                >
+                    <div>{cardName}</div>
+                    <button className="btn detailed-view-btn" onClick={handleDetailedViewClick}>Detailed View</button>
+                </div>
+            </div>
+        );
+    }
+
     return (
         <div className="scheduler-card" 
             style={{ 
-                width: `${widthPercentage}%`, 
+                width: `${(widthPercentage % 100)}%`, 
                 left: `${leftPercentage}%`, 
                 top: `${topPercentage}rem`,
                 backgroundColor: `${CARD_BACKGROUND_COLORS[cardIndex % CARD_BACKGROUND_COLORS.length]}`
             }}>
-            <div>Some Title</div>
+            <div>{cardName}</div>
             <button className="btn detailed-view-btn" onClick={handleDetailedViewClick}>Detailed View</button>
         </div>
     );

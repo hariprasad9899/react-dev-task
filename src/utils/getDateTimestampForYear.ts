@@ -9,14 +9,15 @@ interface TimeStampForYear {
  * @returns {TimeStampForYear} - Object, that constains time stamp for Start and end
  */
 export function getDateTimestampForYear(year:number) : TimeStampForYear {
-    const startDate = new Date(year, 0, 1); // January 1st
-    const endDate = new Date(year, 11, 31); // December 31st
+    const januaryFirst = new Date(`${year}-01-01T00:00:00Z`);
+    const januaryFirstTimestamp = Math.floor(januaryFirst.getTime() / 1000);
 
-    const startTimestamp = Math.floor(startDate.getTime() / 1000); // Convert milliseconds to seconds (Unix timestamp)
-    const endTimestamp = Math.floor(endDate.getTime() / 1000); // Convert milliseconds to seconds (Unix timestamp)
+    // December 31st, YYYY 23:59:59 UTC
+    const decemberThirtyFirst = new Date(`${year}-12-31T23:59:59Z`);
+    const decemberThirtyFirstTimestamp = Math.floor(decemberThirtyFirst.getTime() / 1000);
 
     return {
-        startTimestamp,
-        endTimestamp
+      startTimestamp: januaryFirstTimestamp,
+      endTimestamp: decemberThirtyFirstTimestamp
     };
 }

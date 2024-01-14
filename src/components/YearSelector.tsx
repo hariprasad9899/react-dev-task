@@ -1,6 +1,5 @@
+import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from "react-icons/md"
 import "../styles/yearSelector.css"
-import { ArrowLeft } from "./ArrowLeft"
-import { ArrowRight } from "./ArrowRight"
 
 interface YearSelectorType {
     currentYearValue: number
@@ -15,9 +14,9 @@ export function YearSelector({currentYearValue,decrementYear, incrementYear}:Yea
 
     return (
         <div className="year-selector">
-            <ArrowLeft handleDecrement ={decrementYear} />
+            <span onClick={decrementYear}><MdKeyboardArrowLeft color="#2559D6" size={18} /></span>
             <div className="year-value">{currentYearValue}</div>
-            <ArrowRight handleIncrement = {incrementYear}/>
+            <span onClick={incrementYear}><MdKeyboardArrowRight color="#2559D6" size={18} /></span>
         </div>
     )
 

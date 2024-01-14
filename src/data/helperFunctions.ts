@@ -1,6 +1,7 @@
 import { GroupedRecommendationByTargetIdType, RecommendationApiDataType } from "../redux/sliceType"
 import { DEFAULT_YEAR } from "./constants"
 
+// returns the year stored in the session storage. IF not, returns the default year 
 export const getTargetYear = () => {
     if(sessionStorage.getItem("targetYear")) {
         const savedTargetYear = sessionStorage.getItem("targetYear") || DEFAULT_YEAR
@@ -10,6 +11,7 @@ export const getTargetYear = () => {
     }
 }
 
+// function to group all the recommendations by its respective target id and also returns the list set of unique target id
 export const groupByTargetId = (recommendationData:RecommendationApiDataType[]) => {
     const filteredTargetObj:GroupedRecommendationByTargetIdType = {};
     const targetIds: number[] = [];

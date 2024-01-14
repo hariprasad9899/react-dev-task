@@ -1,3 +1,4 @@
+// rendered when there was no route configured for navlink 
 export function RouteNotFound() {
     
     return (

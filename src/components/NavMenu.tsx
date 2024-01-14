@@ -1,29 +1,21 @@
-import { useNavigate } from "react-router";
+import { NavLink } from "react-router-dom";
 
 interface NavMenuType {
     navMenuTitle: string;
     navMenuIcon: string
     navRoute:string
-    activeMenu:string
-    updateActiveMenu: (menuName:string) => void
 }
 
+// renders the single nav component menu with active action management 
 export function NavMenu(props:NavMenuType) {
 
-    const {navMenuTitle, navMenuIcon, navRoute, activeMenu, updateActiveMenu} = props;
-
-    const navigate = useNavigate()
-    
-    const handleNavigation= () => {
-        navigate(`/${navRoute}`)
-        updateActiveMenu(navRoute)
-    }   
+    const {navMenuTitle, navMenuIcon, navRoute } = props;
 
     return (
-        <div className={`navmenu ${activeMenu === navRoute ? "navmenu-active" : ""}`} onClick={handleNavigation}>
+        <NavLink to={`/${navRoute}`} className={`navmenu`}>
             <img src={navMenuIcon} alt="" className='navmenu-icon' />
             <div className='navmenu-title'>{navMenuTitle}</div>
-        </div>
+        </NavLink>
     )
 
 }

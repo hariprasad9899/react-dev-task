@@ -1,6 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit"
 import { apiUrl } from "./axiosInstance"
 
+// Async thunk requst to get all the recommendation for a particular year, and store it in the redux store 
 export const getUserRecomendation = createAsyncThunk('getUserRecommendation/useRecommendationData', async (timeStampInfo:{start:number | null, end: number | null}) => {
 
     const { start, end } = timeStampInfo

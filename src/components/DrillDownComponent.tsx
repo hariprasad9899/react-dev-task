@@ -10,6 +10,7 @@ import { SchedulerCard } from "./SchedulerCard";
 import { DrillDownCard } from "./DrillDownCard";
 import { getDateDifference } from "../utils/getDateDifference";
 import { getDaysInBetween } from "../utils/getDaysInBetween";
+import { useNavigate } from "react-router";
 export function DrillDownComponent() {
     const capturedValue: any = sessionStorage.getItem("recommendation");
     const [result, setResult] = useState({});
@@ -24,6 +25,11 @@ export function DrillDownComponent() {
         return Array.from({ length }, (_, index) => index + 1);
     };
 
+    const navigate = useNavigate()
+
+    const handleRecommendationNavigation = () => {
+        navigate(`/recomendations`)
+    }
 
     useEffect(() => {
         if (targetIdForDetailedView && recommendations) {
@@ -147,7 +153,7 @@ export function DrillDownComponent() {
             <div className="drill-down-title">
                 <div className="drill-down-breadcrum">
                     <div>
-                        <span>Recomendations</span>
+                        <span onClick={handleRecommendationNavigation} className="recommendations-route">Recommendations</span>
                         <span> / </span>
                         <span>    {recommendation[0]?.targetName}</span>
                     </div>

@@ -28,7 +28,4 @@ export function getMonthsAndDays(data:Iprops[]) {
     return result;
   }
   
-  const data :Iprops[]= [{ startDate: '9/03/2023', endDate: '30/05/2023' }];
-  const result = getMonthsAndDays(data);
-  
-  console.log(result);
+ 

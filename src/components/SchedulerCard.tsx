@@ -9,11 +9,14 @@ interface SchedulerCardType {
     toDate: number | null,
     cardIndex: number,
     cardName: string,
-    targetedId: number
+    targetedId: number,
+    height?: string,
+    button?:boolean,
+
 }
 
 // single card component to be placed inside the scheduler 
-export function SchedulerCard({ fromDate, toDate, cardIndex, cardName, targetedId }: SchedulerCardType) {
+export function SchedulerCard({ fromDate, toDate, cardIndex, cardName, targetedId,height,button=true }: SchedulerCardType) {
     const navigate = useNavigate()
     const dispatch = useAppDispatch()
 
@@ -59,7 +62,9 @@ export function SchedulerCard({ fromDate, toDate, cardIndex, cardName, targetedI
                     width: `${widthPercentage % 100}%`, 
                     left: `${leftPercentage}%`, 
                     top: `${topPercentage}rem`,
-                    backgroundColor: `${backgroundColor}`
+                    backgroundColor: `${backgroundColor}`,
+                    height:`${height}`,
+                    minHeight:'32px'
                 }}>
                 <div className="scheduler-hover-card" 
                     style={{
@@ -79,10 +84,11 @@ export function SchedulerCard({ fromDate, toDate, cardIndex, cardName, targetedI
                 width: `${(widthPercentage % 100)}%`, 
                 left: `${leftPercentage}%`, 
                 top: `${topPercentage}rem`,
-                backgroundColor: `${backgroundColor}`
+                backgroundColor: `${backgroundColor}`,
+                height:`${height}`
             }}>
             <div>{cardName}</div>
-            <button className="btn detailed-view-btn" onClick={handleDetailedViewClick}>Detailed View</button>
+            {button&&(<button className="btn detailed-view-btn" onClick={handleDetailedViewClick}>Detailed View</button>)}
         </div>
     );
 }

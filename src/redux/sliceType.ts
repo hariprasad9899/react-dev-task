@@ -3,7 +3,7 @@ export interface UserRecommendationType<T> {
     isLoading: boolean,
     isError: boolean,
     isEmpty: boolean,
-    recommendations: {} | T,
+    recommendations: {} |  T| any,
     targetIdSet: number[] | [],
     targetIdForDetailedView: number | null
 }

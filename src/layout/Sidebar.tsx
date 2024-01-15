@@ -2,7 +2,7 @@ import Logo from '../assets/svg/Logo.svg';
 import Profile from '../assets/svg/Account.svg';
 import HideNavIcon from '../assets/svg/HideMenu.svg';
 import { NavMenu } from '../components/NavMenu';
-import "../styles/sidebar.css"
+import "../styles/sideBar.css"
 import { navMenuData } from '../data/navMenuData';
 import { nanoid } from 'nanoid';
 import AddIcon from "../assets/svg/AddIcon.svg"

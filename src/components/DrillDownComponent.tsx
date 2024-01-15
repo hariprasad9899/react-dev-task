@@ -130,7 +130,7 @@ export function DrillDownComponent() {
 
             setDaysInBetween(days?.numDays)
             if (transformedRecommendation) {
-                console.log(days)
+                // console.log(days)
                 setRecommendation(transformedRecommendation);
             }
         } else {
@@ -138,7 +138,7 @@ export function DrillDownComponent() {
         }
     }, [])
     useEffect(()=>{
-        console.log(recommendation)
+        // console.log(recommendation)
          // console.log("Transformed Recommendation", transformedRecommendation);
          const daysDifferenceOrNull = getDaysInBetween(recommendation[0]?.dateFrom, recommendation[0]?.dateTo);
 

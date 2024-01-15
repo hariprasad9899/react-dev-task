@@ -33,9 +33,9 @@ export function DrillDownComponent() {
 
             sessionStorage.setItem('recommendation', JSON.stringify(recommendations?.[id]))
             const capturedValue = sessionStorage.getItem("recommendation")
-            console.log((capturedValue))
+            // console.log((capturedValue))
             if (capturedValue) {
-                console.log("captured", JSON.parse(capturedValue))
+                // console.log("captured", JSON.parse(capturedValue))
                 // setRecommendation(JSON.parse(capturedValue))
             }
             const allFromDates = recommendations?.[id].map((item: any) =>
@@ -50,12 +50,12 @@ export function DrillDownComponent() {
             flattenedFromDates.setMonth(flattenedFromDates.getMonth() + 1)
             const flattenedToDates = allToDates.flat().filter((date: any) => date).reduce((min: any, currentDate: any) => (currentDate < min ? currentDate : min), allToDates[0]);
             flattenedToDates.setMonth(flattenedToDates.getMonth() + 1)
-            console.log()
+     
             setOldestDate(flattenedFromDates.getDate().toLocaleString().padStart(2, 0) + "/" + flattenedFromDates.getMonth().toLocaleString().padStart(2, 0) + "/" + flattenedFromDates.getFullYear())
             setLatestDate(flattenedToDates.getDate().toLocaleString().padStart(2, 0) + "/" + flattenedToDates.getMonth().toLocaleString().padStart(2, 0) + "/" + flattenedToDates.getFullYear())
             // setLatestDate(Math.max(...flattenedToDates).toLocaleString())
 
-            console.log(flattenedFromDates.getDate() + "/" + flattenedFromDates.getMonth().toLocaleString().padStart(2, 0) + "/" + allFromDates, flattenedToDates.getDate().toLocaleString().padStart(2, 0) + "/" + flattenedToDates.getMonth().toLocaleString().padStart(2, 0) + "/" + flattenedToDates.getFullYear())
+            // console.log(flattenedFromDates.getDate() + "/" + flattenedFromDates.getMonth().toLocaleString().padStart(2, 0) + "/" + allFromDates, flattenedToDates.getDate().toLocaleString().padStart(2, 0) + "/" + flattenedToDates.getMonth().toLocaleString().padStart(2, 0) + "/" + flattenedToDates.getFullYear())
         }
 
     }, []);
@@ -63,7 +63,7 @@ export function DrillDownComponent() {
 
         const getMonthsAndDays = (recommendation: any) => {
             const newResult: any = {};
-            console.log(recommendation)
+            // console.log(recommendation)
             recommendation.forEach(({ dateFrom, dateTo }: { dateFrom: string, dateTo: string }) => {
 
                 const [startDay, startMonth, startYear] = dateFrom.split('/').map(Number);
@@ -116,7 +116,7 @@ export function DrillDownComponent() {
                 }
             });
 
-            console.log("Transformed Recommendation", transformedRecommendation);
+            // console.log("Transformed Recommendation", transformedRecommendation);
             const daysDifferenceOrNull = getDaysInBetween(recommendation[0]?.dateFrom, recommendation[0]?.dateTo);
 
             // If daysDifferenceOrNull is null, set a default value (0 in this case)
@@ -124,7 +124,7 @@ export function DrillDownComponent() {
 
             setDaysInBetween(days?.numDays)
             if (transformedRecommendation) {
-                console.log(daysInBetween)
+                // console.log(daysInBetween)
                 setRecommendation(transformedRecommendation);
             }
         } else {

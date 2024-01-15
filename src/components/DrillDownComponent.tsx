@@ -11,7 +11,7 @@ import { DrillDownCard } from "./DrillDownCard";
 import { getDateDifference } from "../utils/getDateDifference";
 import { getDaysInBetween } from "../utils/getDaysInBetween";
 export function DrillDownComponent() {
-    // const data = [{ startDate: '9/12/2022', endDate: '30/03/2023' }];
+    const capturedValue: any = sessionStorage.getItem("recommendation");
     const [result, setResult] = useState({});
     const [janYear, setJanYear] = useState(2024)
     const [oldestDate, setOldestDate] = useState('')
@@ -99,7 +99,7 @@ export function DrillDownComponent() {
     //   console.log(Object.values(result))
     // console.log(CreateArrayWithLengthAndValue(31))
     useEffect(() => {
-        const capturedValue: any = sessionStorage.getItem("recommendation");
+   
 
         if (capturedValue && capturedValue.length > 0) {
             const parsedRecommendation = JSON.parse(capturedValue);
@@ -124,14 +124,23 @@ export function DrillDownComponent() {
 
             setDaysInBetween(days?.numDays)
             if (transformedRecommendation) {
-                // console.log(daysInBetween)
+                console.log(days)
                 setRecommendation(transformedRecommendation);
             }
         } else {
             console.error("No valid recommendation found");
         }
     }, [])
+    useEffect(()=>{
+        console.log(recommendation)
+         // console.log("Transformed Recommendation", transformedRecommendation);
+         const daysDifferenceOrNull = getDaysInBetween(recommendation[0]?.dateFrom, recommendation[0]?.dateTo);
 
+         // If daysDifferenceOrNull is null, set a default value (0 in this case)
+         const days = daysDifferenceOrNull ?? 0;
+
+         setDaysInBetween(days?.numDays)
+    },[recommendation])
 
     return (
         <div className="drill-down-container">

@@ -11,9 +11,9 @@ const endDate: Date = new Date(formattedendDateString?formattedendDateString:'20
 
 // Calculate the difference in milliseconds
 const timeDifference: number = endDate.getTime() - startDate.getTime();
-// console.log(startDateStr,endDateStr,timeDifference)
+console.log(startDateStr,endDateStr,timeDifference)
 // Convert milliseconds to days (1 day = 24 * 60 * 60 * 1000 milliseconds)
 const numDays: number = Math.floor(timeDifference / (24 * 60 * 60 * 1000));
-// console.log(numDays)
+console.log(numDays)
 return{numDays}
 }

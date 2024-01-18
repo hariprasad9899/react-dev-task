@@ -42,7 +42,7 @@ export function DrillDownComponent() {
             
             if (capturedValue) {
                 // console.log("captured", JSON.parse(capturedValue))
-                // setRecommendation(JSON.parse(capturedValue))
+                setRecommendation(JSON.parse(capturedValue))
             }
             const allFromDates = recommendations?.[id].map((item: any) =>
                 (new Date(item.dateFrom)),
@@ -130,7 +130,7 @@ export function DrillDownComponent() {
             setDaysInBetween(days?.numDays)
           
             if (transformedRecommendation) {
-                // console.log(days)
+               
                 setRecommendation(transformedRecommendation);
             }
         } else {

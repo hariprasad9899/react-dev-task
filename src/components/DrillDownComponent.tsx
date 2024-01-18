@@ -33,7 +33,7 @@ export function DrillDownComponent() {
 
             sessionStorage.setItem('recommendation', JSON.stringify(recommendations?.[id]))
             const capturedValue = sessionStorage.getItem("recommendation")
-            // console.log((capturedValue))
+            
             if (capturedValue) {
                 // console.log("captured", JSON.parse(capturedValue))
                 // setRecommendation(JSON.parse(capturedValue))
@@ -99,8 +99,7 @@ export function DrillDownComponent() {
     //   console.log(Object.values(result))
     // console.log(CreateArrayWithLengthAndValue(31))
     useEffect(() => {
-   
-
+        const capturedValue: any = sessionStorage.getItem("recommendation");
         if (capturedValue && capturedValue.length > 0) {
             const parsedRecommendation = JSON.parse(capturedValue);
 
@@ -123,8 +122,8 @@ export function DrillDownComponent() {
             const days = daysDifferenceOrNull ?? 0;
 
             setDaysInBetween(days?.numDays)
+          
             if (transformedRecommendation) {
-                console.log(days)
                 setRecommendation(transformedRecommendation);
             }
         } else {
@@ -132,7 +131,7 @@ export function DrillDownComponent() {
         }
     }, [])
     useEffect(()=>{
-        console.log(recommendation)
+ 
          // console.log("Transformed Recommendation", transformedRecommendation);
          const daysDifferenceOrNull = getDaysInBetween(recommendation[0]?.dateFrom, recommendation[0]?.dateTo);
 
